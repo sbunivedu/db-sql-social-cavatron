@@ -27,28 +27,58 @@ directed red edges indicate that one student likes another student.
 
 ## Write queries
 1. Find the names of all students who are friends with someone named Gabriel.
-1. Find all students who do not appear in the Likes table (as a student who
-  likes or is liked) and return their names and grades.
-1. (*) Find the name and grade of all students who are liked by more than one
-  other student.
-1. (*) For every student who likes someone 2 or more
-  grades younger than themselves, return that student's name and grade, and the
-  name and grade of the student they like.
-1. (**) Find names and grades of students who only have friends in the same
-  grade. Return the result sorted by grade, then by name within each grade.
-  (what about students with no friends?)
-1. (***) For each student A who likes a student B where the two are not friends,
-  find if they have a friend C in common (who can introduce them!). For all
-  such trios, return the name and grade of A, B, and C.
-1. (**) Find the difference between the number of students in the school and
-  the number of different first names.
-1. (**) What is the average number of friends per student? (Your result should
-  be just one number.)
-1. (***) Find the number of students who are either friends with Cassandra or
-  are friends of friends of Cassandra. Do not count Cassandra, even though
-  technically she is a friend of a friend.
-1. (***) Find the name and grade of the student(s) with the greatest number of
-  friends.
+    ```
+    
+    ```
+2. Find all students who do not appear in the Likes table (as a student who 
+   likes or is liked) and return their names and grades.
+    ```
+    
+    ```
+3. (*) Find the name and grade of all students who are liked by more than one
+   other student.
+    ```
+    
+    ```
+4. (*) For every student who likes someone 2 or more
+   grades younger than themselves, return that student's name and grade, and the
+   name and grade of the student they like.
+    ```
+    
+    ```
+5. (**) Find names and grades of students who only have friends in the same
+   grade. Return the result sorted by grade, then by name within each grade.
+   (what about students with no friends?)
+    ```
+    
+    ```
+6. (***) For each student A who likes a student B where the two are not friends,
+   find if they have a friend C in common (who can introduce them!). For all
+   such trios, return the name and grade of A, B, and C.
+    ```
+    
+    ```
+7. (**) Find the difference between the number of students in the school and
+   the number of different first names.
+    ```
+    
+    ```
+8. (**) What is the average number of friends per student? (Your result should
+   be just one number.)
+    ```
+    
+    ```
+9. (***) Find the number of students who are either friends with Cassandra or
+   are friends of friends of Cassandra. Do not count Cassandra, even though
+   technically she is a friend of a friend.
+    ```
+    
+    ```
+10. (***) Find the name and grade of the student(s) with the greatest number of
+    friends.
+    ```
+    
+    ```
 
 ## Setup MySQL on Cloud 9
 Install MySQL database engine on command line if you haven't done so:
