@@ -28,56 +28,73 @@ directed red edges indicate that one student likes another student.
 ## Write queries
 1. Find the names of all students who are friends with someone named Gabriel.
     ```
-    
+    SELECT name
+    FROM (
+      SELECT ID
+      FROM Highschooler
+      WHERE name = 'Gabriel'
+    ) AS g, Friend f, Highschooler h
+    WHERE f.ID1 = h.ID
+    AND f.ID2 = g.ID;
     ```
 2. Find all students who do not appear in the Likes table (as a student who 
    likes or is liked) and return their names and grades.
     ```
-    
+    SELECT name, grade
+    FROM Highschooler
+    WHERE NOT ID IN (
+      SELECT ID1
+      FROM Likes
+    )
+    AND NOT ID IN (
+      SELECT ID2
+      FROM Likes
+    );
     ```
 3. (*) Find the name and grade of all students who are liked by more than one
    other student.
     ```
-    
+    SELECT name, grade
+    FROM (
+      SELECT ID2, COUNT(ID2) AS c
+      FROM Likes
+      GROUP BY ID2
+    ) AS l, Highschooler h
+    WHERE h.ID = l.ID2
+    AND l.c > 1;
     ```
 4. (*) For every student who likes someone 2 or more
    grades younger than themselves, return that student's name and grade, and the
    name and grade of the student they like.
     ```
-    
-    ```
-5. (**) Find names and grades of students who only have friends in the same
-   grade. Return the result sorted by grade, then by name within each grade.
-   (what about students with no friends?)
-    ```
-    
-    ```
-6. (***) For each student A who likes a student B where the two are not friends,
-   find if they have a friend C in common (who can introduce them!). For all
-   such trios, return the name and grade of A, B, and C.
-    ```
-    
-    ```
-7. (**) Find the difference between the number of students in the school and
-   the number of different first names.
-    ```
-    
+    SELECT studentName,
+           studentGrade,
+           likesName,
+           likesGrade
+    FROM (
+      SELECT h.name AS studentName,
+             h.grade AS studentGrade,
+             l.name AS likesName,
+             l.grade AS likesGrade,
+             (h.grade - l.grade) AS gradeDiff
+      FROM Highschooler h, (
+        SELECT ID1, name, grade
+        FROM Likes l, Highschooler h
+        WHERE l.ID2 = h.ID
+      ) AS l
+      WHERE h.ID = l.ID1
+    ) AS d
+    WHERE d.gradeDiff >= 2;
     ```
 8. (**) What is the average number of friends per student? (Your result should
    be just one number.)
     ```
-    
-    ```
-9. (***) Find the number of students who are either friends with Cassandra or
-   are friends of friends of Cassandra. Do not count Cassandra, even though
-   technically she is a friend of a friend.
-    ```
-    
-    ```
-10. (***) Find the name and grade of the student(s) with the greatest number of
-    friends.
-    ```
-    
+    SELECT AVG(d.friendCount) AS avgFriendCount
+    FROM (
+      SELECT COUNT(ID1) AS friendCount
+      FROM Friend
+      GROUP BY ID1
+    ) AS d;
     ```
 
 ## Setup MySQL on Cloud 9
